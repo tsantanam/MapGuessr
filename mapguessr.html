@@ -38,7 +38,7 @@
   <body>
     <div id="control-panel">
         <h1>MapGuessr</h1>
-        <p>Welcome to MapGuessr! You will be shown a section of a map. You may zoom in and out, but you cannot pan. Your task is to guess the country shown in the map selection. You can type the country name in the field and then click submit to see if you were correct or incorrect. Sometimes it may take a few seconds for the map to render, so please be patient. Enjoy the game!</p>
+        <p>Welcome to MapGuessr! You will be shown a section of a map. You may zoom in and out, but you cannot pan. Your task is to guess the country shown in the map selection. You can type the country name in the field and then click submit to see if you were correct or incorrect. Sometimes it may take a few seconds for the map to render, so please be patient. If there are long hangups of more than 10-15 seconds, please refresh the page. Enjoy the game!</p>
         <div>
           <label>Guess</label>
           <input id="guess" type="text"></input>
@@ -56,8 +56,6 @@
       </div>
   </body>
 
-  
-
   <script type="text/javascript">
 
     const {DeckGL} = deck;
@@ -72,6 +70,7 @@
 }
 
 function newMap(){
+    document.getElementById('guess').value='';
 
     const lon = getRandomArbitrary(-8.26,36.56)
     const lat = getRandomArbitrary(37.3,53.55)
