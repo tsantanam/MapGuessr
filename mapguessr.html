@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <title>MapGuessr</title>
+    <script src="https://unpkg.com/h3-js@3.7.2/dist/h3-js.umd.js"></script>
+    <script src="https://unpkg.com/deck.gl@^8.0.0/dist.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js"></script>
+
+    <style type="text/css">
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+      }
+
+      #control-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 12px;
+        padding: 20px;
+        font-size: 12px;
+        line-height: 1.5;
+        z-index: 1;
+        background: #fff;
+        font-family: Helvetica, Arial, sans-serif;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+        max-width: 200px;
+      }
+
+      label {
+        display: inline-block;
+        width: 140px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="control-panel">
+        <h1>MapGuessr</h1>
+        <p>Welcome to MapGuessr! You will be shown a section of a map. You may zoom in and out, but you cannot pan. Your task is to guess the country shown in the map selection. You can type the country name in the field and then click submit to see if you were correct or incorrect. Sometimes it may take a few seconds for the map to render, so please be patient. Enjoy the game!</p>
+        <div>
+          <label>Guess</label>
+          <input id="guess" type="text"></input>
+          <br>
+          <br>
+          <span id="guess-value"></span>
+        </div>
+        <br>
+        <div>
+            <input id="submit" type="button" value="Submit Guess"></input>
+            <br>
+            <br>
+            <span id="submit-value"></span>    
+        </div>
+      </div>
+  </body>
+
+  
+
+  <script type="text/javascript">
+
+    const {DeckGL} = deck;
+    const myAPIKey = '4140f161ad0742a7947d182933aef03a';
+
+    function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+    }
+
+    function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function newMap(){
+
+    const lon = getRandomArbitrary(-8.26,36.56)
+    const lat = getRandomArbitrary(37.3,53.55)
+
+    const deckgl = new DeckGL({
+      mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+      initialViewState: {
+        longitude: lon,
+        latitude: lat,
+        zoom: 11,
+        minZoom: 11,
+        maxZoom: 24,
+        pitch: 0,
+        bearing: 0
+      },
+      controller: {dragPan: false}
+    });
+    
+    var ans1=[];
+    const geocodingUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=${myAPIKey}`;
+      fetch(geocodingUrl).then(result => result.json()).then(featureCollection => {
+      const foundAddress = featureCollection.features[0];
+      const ans = foundAddress.properties.country
+      ans1.push(ans);
+    });
+
+    sleep(3000).then(() => {   console.log(ans1[0]);
+        if (ans1[0]==null){
+            newMap();
+        }
+        document.getElementById('submit').onclick = function() {
+    if(document.getElementById('guess').value==ans1[0]){document.getElementById('submit-value').innerHTML = 'Correct!';}
+    else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(ans1[0])}
+    newMap();
+}
+    
+    
+    
+    });
+
+}
+newMap();
+
+  </script>
+</html>
