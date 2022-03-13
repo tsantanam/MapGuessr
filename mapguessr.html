@@ -396,12 +396,12 @@ function newMap(score, data){
     });
    
 
-    sleep(1500).then(() => {   console.log(ans1[0]);
+    sleep(1500).then(() => {   //console.log(ans1[0]);
         if (ans1[0]==null){
             newMap(document.getElementById('score-value').innerHTML, data);
         }
         document.getElementById('submit').onclick = function() {
-    if(document.getElementById('guess').value==ans1[0]){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; console.log(score);document.getElementById('score-value').innerHTML=score;}
+    if(document.getElementById('guess').value==ans1[0]){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; document.getElementById('score-value').innerHTML=score;}
     else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(ans1[0]); document.getElementById('score-value').innerHTML=0;}
     newMap(document.getElementById('score-value').innerHTML, data);
     
@@ -420,7 +420,7 @@ d3.dsv(",", "cities.csv", function (d) {
         lon: d.f,
       }
     }).then(function (data) {
-      console.log(data);
+      //console.log(data);
       newMap(0, data);
     });
 
