@@ -370,27 +370,28 @@ function newMap(score){
     
     
     });
-    */
+    
 
     
     var ans1=[];
-    const geocodingUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+    const geocodingUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
     fetch(geocodingUrl).then(result => result.json()).then(featureCollection => {
       //console.log(featureCollection);  
       const foundAddress = featureCollection;
       const ans = foundAddress.countryName;
       ans1.push(ans);
     });
-    /*
+    */
+    var ans1=[];
     const geocodingUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=${myAPIKey}`;
       fetch(geocodingUrl).then(result => result.json()).then(featureCollection => {
       const foundAddress = featureCollection.features[0];
       const ans = foundAddress.properties.country
       ans1.push(ans);
     });
-    */
+   
 
-    sleep(300).then(() => {   console.log(ans1[0]);
+    sleep(1500).then(() => {   console.log(ans1[0]);
         if (ans1[0]==null){
             newMap(document.getElementById('score-value').innerHTML);
         }
