@@ -684,6 +684,7 @@ function newMap(score, data){
     
 
 }
+document.getElementById('guess').value='';
 d3.dsv(",", "cities.csv", function (d) {
       return {
         // format data attributes if required
