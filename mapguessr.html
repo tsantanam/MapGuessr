@@ -840,7 +840,7 @@ function setCircleDasharray() {
         if (data[randrow].country==null){
             newMap(document.getElementById('score-value').innerHTML, data);
         }
-        document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; newMap(document.getElementById('score-value').innerHTML, data);}
+        document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); newMap(document.getElementById('score-value').innerHTML, data);}
         document.getElementById('submit').onclick = function() {
     if(document.getElementById('guess').value==data[randrow].country){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; document.getElementById('score-value').innerHTML=score;clearInterval(timerInterval);}
     else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;clearInterval(timerInterval);}
