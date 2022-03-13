@@ -325,23 +325,48 @@ function newMap(score){
     document.getElementById('guess').value='';
     document.getElementById('score-value').innerHTML=score;
 
-    const lon = getRandomArbitrary(-8.26,36.56)
-    const lat = getRandomArbitrary(37.3,53.55)
+    const lon = getRandomArbitrary(-8.08,78.39)
+    const lat = getRandomArbitrary(7.84,57.5)
 
     const deckgl = new DeckGL({
       mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
       initialViewState: {
         longitude: lon,
         latitude: lat,
-        zoom: 11,
-        minZoom: 11,
+        zoom: 10,
+        minZoom: 10,
         maxZoom: 24,
         pitch: 0,
         bearing: 0
       },
       controller: {dragPan: false}
     });
+    var ans1=[];
+    const geocodingUrl = `http://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&username=tsantanam`;
+    fetch(geocodingUrl).then(result => result.json()).then(featureCollection => {
+        
+        //console.log(featureCollection);
+        const foundAddress = featureCollection.geonames[0];
+        const ans = foundAddress.countryName
+        ans1.push(ans);
+
     
+    });
+    sleep(3000).then(() => {   console.log(ans1[0]);
+        if (ans1[0]==null){
+            newMap(document.getElementById('score-value').innerHTML);
+        }
+        document.getElementById('submit').onclick = function() {
+    if(document.getElementById('guess').value==ans1[0]){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; console.log(score);document.getElementById('score-value').innerHTML=score;}
+    else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(ans1[0]); document.getElementById('score-value').innerHTML=0;}
+    newMap(document.getElementById('score-value').innerHTML);
+}
+    
+    
+    
+    });
+
+    /*
     var ans1=[];
     const geocodingUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=${myAPIKey}`;
       fetch(geocodingUrl).then(result => result.json()).then(featureCollection => {
@@ -363,6 +388,7 @@ function newMap(score){
     
     
     });
+    */
 
 }
 newMap(0);
