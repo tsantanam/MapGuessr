@@ -341,6 +341,7 @@ function newMap(score){
       },
       controller: {dragPan: false}
     });
+    /*
     var ans1=[];
     const geocodingUrl = `http://api.geonames.org/findNearbyPlaceNameJSON?lat=${lat}&lng=${lon}&username=tsantanam`;
     fetch(geocodingUrl).then(result => result.json()).then(featureCollection => {
@@ -365,8 +366,9 @@ function newMap(score){
     
     
     });
+    */
 
-    /*
+    
     var ans1=[];
     const geocodingUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=${myAPIKey}`;
       fetch(geocodingUrl).then(result => result.json()).then(featureCollection => {
@@ -388,7 +390,6 @@ function newMap(score){
     
     
     });
-    */
 
 }
 newMap(0);
