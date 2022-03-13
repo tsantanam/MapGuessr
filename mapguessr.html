@@ -26,7 +26,7 @@
         background: #fff;
         font-family: Helvetica, Arial, sans-serif;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
-        max-width: 200px;
+        max-width: 210px;
       }
 
       label {
@@ -100,6 +100,7 @@
             <option value="Curacao">Curacao</option>
             <option value="Cyprus">Cyprus</option>
             <option value="Czechia">Czechia</option>
+            <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
             <option value="Denmark">Denmark</option>
             <option value="Djibouti">Djibouti</option>
             <option value="Dominica">Dominica</option>
@@ -326,8 +327,8 @@ function newMap(score){
     document.getElementById('guess').value='';
     document.getElementById('score-value').innerHTML=score;
 
-    const lon = getRandomArbitrary(-10.04,44.6);
-    const lat = getRandomArbitrary(1,60);
+    const lon = getRandomArbitrary(-10.04,37);
+    const lat = getRandomArbitrary(29,61);
     //const lon = getRandomArbitrary(-180,180);
     //const lat = getRandomArbitrary(-90,90);
 
@@ -389,7 +390,7 @@ function newMap(score){
     });
     */
 
-    sleep(200).then(() => {   console.log(ans1[0]);
+    sleep(175).then(() => {   console.log(ans1[0]);
         if (ans1[0]==null){
             newMap(document.getElementById('score-value').innerHTML);
         }
