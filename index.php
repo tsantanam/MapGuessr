@@ -1,1 +1,1 @@
-<?php include_once("mapguessr.html"); ?>
+<?php include_once("mapguessr3.html"); ?>
