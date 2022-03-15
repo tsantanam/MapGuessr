@@ -1207,7 +1207,7 @@ controller: {dragPan: false}
     else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;clearInterval(timerInterval);}
     document.getElementById('link-value').innerHTML= `<a href="https://www.google.com/maps/place/${data[randrow].city},${data[randrow].name}" target="_blank">See Previous City</a>`;
     //newMap(document.getElementById('score-value').innerHTML, data);
-    document.getElementById('next').style.visibility ='visible';
+    if (Number.isInteger(Number(document.getElementById('hard').value))){document.getElementById('next').style.visibility ='visible';}
 
 }
 
