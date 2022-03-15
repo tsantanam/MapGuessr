@@ -740,6 +740,7 @@ startTimer();
 function onTimesUp() {
   clearInterval(timerInterval);
   text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;
+  document.getElementById('link-value').innerHTML= `<a href="https://www.google.com/maps/place/${data[randrow].city},${data[randrow].name}" target="_blank">See Previous City</a>`;
   newMap(document.getElementById('score-value').innerHTML, data);
 }
 
