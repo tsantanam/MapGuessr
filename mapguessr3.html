@@ -651,15 +651,15 @@
             </select>
             -->
             <br>
-            <span id="guess-value"></span>
             </div>
             <br>
             <div>
                 <input id="submit" type="button" value="Submit Guess"></input>
                 <br>
                 <br>
-                <span id="submit-value"></span>    
+                <span id="submit-value" style="font-weight:bold"></span>    
             </div>
+            <span id="link-value" style="font-weight:bold"></span>   
             <br>
             <div>
                 <h2 id="score">Score: </h2>
@@ -959,6 +959,7 @@ function setCircleDasharray() {
         document.getElementById('submit').onclick = function() {
     if(document.getElementById('guess').value==data[randrow].country){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; document.getElementById('score-value').innerHTML=score;clearInterval(timerInterval);}
     else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;clearInterval(timerInterval);}
+    document.getElementById('link-value').innerHTML= `<a href="https://www.google.com/maps/place/${data[randrow].city},${data[randrow].name}" target="_blank">See Previous City</a>`;
     newMap(document.getElementById('score-value').innerHTML, data);
 
 }
@@ -970,13 +971,15 @@ function setCircleDasharray() {
 
 }
 document.getElementById('guess').value='';
+//alert("Welcome to MapGuessr! You will be shown a section of a map. You may zoom in and pan around. Your task is to guess the country shown in the map selection. You can select the country name in the dropdown field and then click submit to see if you were correct or incorrect. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the difficulty level with the difficulty dropdown. Street Mode is a 3D map mode with buildings. There is a two-minute time limit for each round. Enjoy the game!");
 d3.dsv(",", "cities.csv", function (d) {
       return {
         // format data attributes if required
         lat: d.e,
         lon: d.f,
         country: d.i,
-        name: d.t
+        name: d.t,
+        city: d.c
       }
     }).then(function (data) {
       //console.log(data);
