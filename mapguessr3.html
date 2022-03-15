@@ -140,6 +140,7 @@
                 <option value=18>Very Hard</option>
                 <option value=19>Expert</option>
                 <option value=20>Street Mode (Beta)</option>
+                <option value=11.1>Easy Multiplayer (Beta)</option>
             </select>       
             </div>
             <br>
@@ -672,8 +673,13 @@
             <span id="link-value" style="font-weight:bold"></span>   
             <br>
             <div>
-                <h2 id="score">Score: </h2>
-                <h2 id="score-value"></h2>    
+                <h3 id="score">Score: </h3>
+                <h3 id="score-value"></h3>    
+            </div>
+            <div>
+                <label id="codeval">Multiplayer Code: </label>
+                <input id="code" type="text" value="1619"></input>
+                <input id="codesub" type="button" value="Submit Code"></input>
             </div>
             <p>Welcome to MapGuessr! You will be shown a section of a map. Your task is to guess the country shown in the map selection. You can select the country name in the guess field and submit to see if you were correct. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the game mode and movement types with the dropdowns. There is a three-minute time limit for each round. Enjoy the game!</p>
             
@@ -686,6 +692,12 @@
 
     const {DeckGL} = deck;
 
+    Math.seed = function(s) {
+    return function() {
+        s = Math.sin(s) * 10000; return s - Math.floor(s);
+    };
+};
+
     function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
     }
@@ -695,6 +707,8 @@
 }
 //var score = 0;
 function newMap(score, data){
+
+    
 
     const FULL_DASH_ARRAY = 283;
 const WARNING_THRESHOLD = 15;
@@ -817,11 +831,45 @@ function setCircleDasharray() {
     document.getElementById('guess').value='';
     document.getElementById('score-value').innerHTML=score;
 
-    //console.log(data);
-    const randrow = Math.floor(getRandomArbitrary(0, 25493));
+    
+    if (Number(document.getElementById('code').value)>=0){
+        seed2 = Number(document.getElementById('code').value);
+    }
+    
+    let randrow=0;
 
+    if (Number(document.getElementById('hard').value)==11.1){
+        document.getElementById('code').style.visibility = 'visible';
+        document.getElementById('codeval').style.visibility = 'visible';
+        document.getElementById('codesub').style.visibility = 'visible';
+        var random1 = Math.seed(Number(document.getElementById('code').value));
+        var random = Math.seed(random1());
+        randrow = Math.floor(random()*25492)+1;
+        //console.log(seed2);
+        
+
+
+    }
+    else{
+        document.getElementById('code').style.visibility = 'hidden';
+        document.getElementById('codeval').style.visibility = 'hidden';
+        document.getElementById('codesub').style.visibility = 'hidden';
+
+    
+
+        //console.log(data);
+        randrow = Math.floor(getRandomArbitrary(0, 25493));
+        
+        
+    
+    }
     const lon = Number(data[randrow].lon);
     const lat = Number(data[randrow].lat);
+
+
+    
+
+    
     //console.log(lon, lat);
     //const lon = getRandomArbitrary(-10.04,37);
     //const lat = getRandomArbitrary(29,61);
@@ -1092,6 +1140,10 @@ controller: {dragPan: false}
     newMap(document.getElementById('score-value').innerHTML, data);
 
 }
+
+    document.getElementById('codesub').onclick=function(){
+        document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); newMap(document.getElementById('score-value').innerHTML, data);
+    }
     
     
     
