@@ -676,6 +676,7 @@
             </div>
             <span id="link-value" style="font-weight:bold"></span>   
             <br>
+            <input id="next" type="button" value="Play Next Map"></input>
             <div>
                 <h3 id="score">Score: </h3>
                 <h3 id="score-value"></h3>    
@@ -693,6 +694,7 @@
   </body>
 
   <script type="text/javascript">
+      document.getElementById('next').style.visibility ='hidden';
 
     const {DeckGL} = deck;
 
@@ -768,7 +770,12 @@ function onTimesUp() {
   clearInterval(timerInterval);
   text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;
   document.getElementById('link-value').innerHTML= `<a href="https://www.google.com/maps/place/${data[randrow].city},${data[randrow].name}" target="_blank">See Previous City</a>`;
-  newMap(document.getElementById('score-value').innerHTML, data);
+  //newMap(document.getElementById('score-value').innerHTML, data);
+  document.getElementById('next').style.visibility ='visible';
+}
+
+document.getElementById('next').onclick = function() {
+    newMap(document.getElementById('score-value').innerHTML, data);
 }
 
 function startTimer() {
@@ -1130,8 +1137,8 @@ function setCircleDasharray() {
         if (data[randrow].country==null){
             newMap(document.getElementById('score-value').innerHTML, data);
         }
-        document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); newMap(document.getElementById('score-value').innerHTML, data);}
-        document.getElementById('move').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); newMap(document.getElementById('score-value').innerHTML, data);}
+        document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
+        document.getElementById('move').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
         document.getElementById('reset').onclick = function() {if (Number(document.getElementById('move').value)==1){
 
     
@@ -1199,7 +1206,8 @@ controller: {dragPan: false}
     if(document.getElementById('guess').value==data[randrow].country){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; document.getElementById('score-value').innerHTML=score;clearInterval(timerInterval);}
     else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;clearInterval(timerInterval);}
     document.getElementById('link-value').innerHTML= `<a href="https://www.google.com/maps/place/${data[randrow].city},${data[randrow].name}" target="_blank">See Previous City</a>`;
-    newMap(document.getElementById('score-value').innerHTML, data);
+    //newMap(document.getElementById('score-value').innerHTML, data);
+    document.getElementById('next').style.visibility ='visible';
 
 }
 
