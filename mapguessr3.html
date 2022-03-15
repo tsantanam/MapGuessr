@@ -142,6 +142,15 @@
                 <option value=20>Street Mode (Beta)</option>
             </select>       
             </div>
+            <br>
+            <div>
+            <label id="movelabel">Movement</label>
+            <select id="move" name="move">
+                <option value=1>Pan and Zoom</option>
+                <option value=2>Pan Only</option>
+                <option value=3>Zoom Only</option>
+            </select>       
+            </div>
             <br>   
             <div>
             <label>Guess</label>
@@ -666,8 +675,7 @@
                 <h2 id="score">Score: </h2>
                 <h2 id="score-value"></h2>    
             </div>
-            <h2>MapGuessr</h2>
-            <p>Welcome to MapGuessr! You will be shown a section of a map. Your task is to guess the country shown in the map selection. You can select the country name in the dropdown field and then click submit to see if you were correct. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the game mode with the difficulty dropdown. There is a three-minute time limit for each round. Enjoy the game!</p>
+            <p>Welcome to MapGuessr! You will be shown a section of a map. Your task is to guess the country shown in the map selection. You can select the country name in the guess field and submit to see if you were correct. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the game mode and movement types with the dropdowns. There is a three-minute time limit for each round. Enjoy the game!</p>
             
             
         </div>
@@ -823,26 +831,80 @@ function setCircleDasharray() {
 
     if (Number(document.getElementById('hard').value)<20){
         document.getElementById('reset').style.visibility = 'visible';
+        document.getElementById('move').style.visibility = 'visible';
+        document.getElementById('movelabel').style.visibility = 'visible';
+        if (Number(document.getElementById('move').value)==1){
 
     
 
-    const deckgl = new DeckGL({
-      mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
-      initialViewState: {
-        longitude: lon,
-        latitude: lat,
-        //zoom: 17,
-        //minZoom: 17,
-        zoom: Number(document.getElementById('hard').value),
-        minZoom: Number(document.getElementById('hard').value),
-        maxZoom: 24,
-        pitch: 0,
-        bearing: 0
-      },
-      controller: {dragPan: true}
-    });
+        const deckgl = new DeckGL({
+        mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+        initialViewState: {
+            longitude: lon,
+            latitude: lat,
+            //zoom: 17,
+            //minZoom: 17,
+            zoom: Number(document.getElementById('hard').value),
+            minZoom: Number(document.getElementById('hard').value),
+            maxZoom: 24,
+            pitch: 0,
+            bearing: 0
+        },
+        controller: {dragPan: true}
+        });}
+
+        else if (Number(document.getElementById('move').value)==2){
+
+            const deckgl = new DeckGL({
+        mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+        initialViewState: {
+            longitude: lon,
+            latitude: lat,
+            //zoom: 17,
+            //minZoom: 17,
+            zoom: Number(document.getElementById('hard').value),
+            minZoom: Number(document.getElementById('hard').value),
+            maxZoom: Number(document.getElementById('hard').value),
+            pitch: 0,
+            bearing: 0
+        },
+        controller: {dragPan: true}
+        });
+            
+
+
+
+        }
+        else{
+            const deckgl = new DeckGL({
+        mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+        initialViewState: {
+            longitude: lon,
+            latitude: lat,
+            //zoom: 17,
+            //minZoom: 17,
+            zoom: Number(document.getElementById('hard').value),
+            minZoom: Number(document.getElementById('hard').value),
+            maxZoom: 24,
+            pitch: 0,
+            bearing: 0
+        },
+        controller: {dragPan: false}
+        });
+
+
+
+
+        }
+
+
+
+
+
 }else{
     document.getElementById('reset').style.visibility = 'hidden';
+    document.getElementById('move').style.visibility = 'hidden';
+        document.getElementById('movelabel').style.visibility = 'hidden';
     mapboxgl.accessToken = 'pk.eyJ1IjoidHNhbnRhbmFtIiwiYSI6ImNsMHF0MWs3bjFycm4zY3Rrb2IyaHZ1MXEifQ.trY9YSU4YQzlm9n8wFMVUQ';
     const map = new mapboxgl.Map({
         style: 'mapbox://styles/mapbox/streets-v11',
@@ -959,21 +1021,70 @@ function setCircleDasharray() {
             newMap(document.getElementById('score-value').innerHTML, data);
         }
         document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); newMap(document.getElementById('score-value').innerHTML, data);}
-        document.getElementById('reset').onclick = function() {const deckgl = new DeckGL({
-      mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
-      initialViewState: {
-        longitude: lon,
-        latitude: lat,
-        //zoom: 17,
-        //minZoom: 17,
-        zoom: Number(document.getElementById('hard').value),
-        minZoom: Number(document.getElementById('hard').value),
-        maxZoom: 24,
-        pitch: 0,
-        bearing: 0
-      },
-      controller: {dragPan: true}
-    });}
+        document.getElementById('move').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); newMap(document.getElementById('score-value').innerHTML, data);}
+        document.getElementById('reset').onclick = function() {if (Number(document.getElementById('move').value)==1){
+
+    
+
+const deckgl = new DeckGL({
+mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+initialViewState: {
+    longitude: lon,
+    latitude: lat,
+    //zoom: 17,
+    //minZoom: 17,
+    zoom: Number(document.getElementById('hard').value),
+    minZoom: Number(document.getElementById('hard').value),
+    maxZoom: 24,
+    pitch: 0,
+    bearing: 0
+},
+controller: {dragPan: true}
+});}
+
+else if (Number(document.getElementById('move').value)==2){
+
+    const deckgl = new DeckGL({
+mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+initialViewState: {
+    longitude: lon,
+    latitude: lat,
+    //zoom: 17,
+    //minZoom: 17,
+    zoom: Number(document.getElementById('hard').value),
+    minZoom: Number(document.getElementById('hard').value),
+    maxZoom: Number(document.getElementById('hard').value),
+    pitch: 0,
+    bearing: 0
+},
+controller: {dragPan: true}
+});
+    
+
+
+
+}
+else{
+    const deckgl = new DeckGL({
+mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+initialViewState: {
+    longitude: lon,
+    latitude: lat,
+    //zoom: 17,
+    //minZoom: 17,
+    zoom: Number(document.getElementById('hard').value),
+    minZoom: Number(document.getElementById('hard').value),
+    maxZoom: 24,
+    pitch: 0,
+    bearing: 0
+},
+controller: {dragPan: false}
+});
+
+
+
+
+}}
         document.getElementById('submit').onclick = function() {
     if(document.getElementById('guess').value==data[randrow].country){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; document.getElementById('score-value').innerHTML=score;clearInterval(timerInterval);}
     else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;clearInterval(timerInterval);}
