@@ -141,6 +141,10 @@
                 <option value=19>Expert</option>
                 <option value=20>Street Mode (Beta)</option>
                 <option value=11.1>Easy Multiplayer (Beta)</option>
+                <option value=14.1>Medium Multiplayer (Beta)</option>
+                <option value=16.1>Hard Multiplayer (Beta)</option>
+                <option value=18.1>Very Hard Multiplayer (Beta)</option>
+                <option value=19.1>Expert Multiplayer (Beta)</option>
             </select>       
             </div>
             <br>
@@ -662,7 +666,7 @@
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
             -->
-            <br>
+
             </div>
             <br>
             <div>
@@ -681,7 +685,7 @@
                 <input id="code" type="text" value="1619"></input>
                 <input id="codesub" type="button" value="Submit Code"></input>
             </div>
-            <p>Welcome to MapGuessr! You will be shown a section of a map. Your task is to guess the country shown in the map selection. You can select the country name in the guess field and submit to see if you were correct. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the game mode and movement types with the dropdowns. There is a three-minute time limit for each round. Enjoy the game!</p>
+            <p>Welcome to MapGuessr! Your task is to guess the country shown in the map selection. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the game mode and movement types with the dropdowns. There is a three-minute time limit for each round. In multiplayer mode, you can generate your own map code and share it to your friends to play the same map. Enjoy the game!</p>
             
             
         </div>
@@ -844,6 +848,64 @@ function setCircleDasharray() {
         document.getElementById('codesub').style.visibility = 'visible';
         var random1 = Math.seed(Number(document.getElementById('code').value));
         var random = Math.seed(random1());
+        randrow = Math.floor(random()*25492)+1;
+        //console.log(seed2);
+        
+
+
+    }
+    else if (Number(document.getElementById('hard').value)==14.1){
+        document.getElementById('code').style.visibility = 'visible';
+        document.getElementById('codeval').style.visibility = 'visible';
+        document.getElementById('codesub').style.visibility = 'visible';
+        var random1 = Math.seed(Number(document.getElementById('code').value));
+        var random2 = Math.seed(random1());
+        var random = Math.seed(random2());
+        randrow = Math.floor(random()*25492)+1;
+        //console.log(seed2);
+        
+
+
+    }
+    else if (Number(document.getElementById('hard').value)==16.1){
+        document.getElementById('code').style.visibility = 'visible';
+        document.getElementById('codeval').style.visibility = 'visible';
+        document.getElementById('codesub').style.visibility = 'visible';
+        var random1 = Math.seed(Number(document.getElementById('code').value));
+        var random2 = Math.seed(random1());
+        var random3 = Math.seed(random2());
+        var random = Math.seed(random3());
+        randrow = Math.floor(random()*25492)+1;
+        //console.log(seed2);
+        
+
+
+    }
+    else if (Number(document.getElementById('hard').value)==18.1){
+        document.getElementById('code').style.visibility = 'visible';
+        document.getElementById('codeval').style.visibility = 'visible';
+        document.getElementById('codesub').style.visibility = 'visible';
+        var random1 = Math.seed(Number(document.getElementById('code').value));
+        var random2 = Math.seed(random1());
+        var random3 = Math.seed(random2());
+        var random4 = Math.seed(random3());
+        var random = Math.seed(random4());
+        randrow = Math.floor(random()*25492)+1;
+        //console.log(seed2);
+        
+
+
+    }
+    else if (Number(document.getElementById('hard').value)==19.1){
+        document.getElementById('code').style.visibility = 'visible';
+        document.getElementById('codeval').style.visibility = 'visible';
+        document.getElementById('codesub').style.visibility = 'visible';
+        var random1 = Math.seed(Number(document.getElementById('code').value));
+        var random2 = Math.seed(random1());
+        var random3 = Math.seed(random2());
+        var random4 = Math.seed(random3());
+        var random5 = Math.seed(random4());
+        var random = Math.seed(random5());
         randrow = Math.floor(random()*25492)+1;
         //console.log(seed2);
         
