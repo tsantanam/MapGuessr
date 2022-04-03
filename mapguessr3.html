@@ -694,6 +694,7 @@
   </body>
 
   <script type="text/javascript">
+    
       document.getElementById('next').style.visibility ='hidden';
 
     const {DeckGL} = deck;
@@ -713,6 +714,7 @@
 }
 //var score = 0;
 function newMap(score, data){
+  //localStorage.setItem('oldscore', score);
 
     
 
@@ -775,6 +777,7 @@ function onTimesUp() {
 }
 
 document.getElementById('next').onclick = function() {
+    document.getElementById('submit').style.visibility = 'visible';
     newMap(document.getElementById('score-value').innerHTML, data);
 }
 
@@ -840,7 +843,20 @@ function setCircleDasharray() {
 
 
     document.getElementById('guess').value='';
-    document.getElementById('score-value').innerHTML=score;
+    //document.getElementById('score-value').innerHTML=score;
+    //console.log(localStorage.getItem('oldscore'));
+    if (localStorage.getItem('oldscore')>=0){
+      document.getElementById('score-value').innerHTML=localStorage.getItem('oldscore');
+    }
+    else{
+      document.getElementById('score-value').innerHTML=score;
+    }
+
+     if(localStorage.getItem('difficulty')!=null){
+       console.log(localStorage.getItem('difficulty'));
+       document.getElementById('hard').value=localStorage.getItem('difficulty');
+     }
+    
 
     
     if (Number(document.getElementById('code').value)>=0){
@@ -956,6 +972,7 @@ function setCircleDasharray() {
 
         const deckgl = new DeckGL({
         mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+        //mapStyle: 'https://tiles.basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
         initialViewState: {
             longitude: lon,
             latitude: lat,
@@ -1137,8 +1154,8 @@ function setCircleDasharray() {
         if (data[randrow].country==null){
             newMap(document.getElementById('score-value').innerHTML, data);
         }
-        document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
-        document.getElementById('move').oninput = function(){document.getElementById('score-value').innerHTML=0; clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
+        document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; localStorage.setItem('oldscore', 0); clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
+        document.getElementById('move').oninput = function(){document.getElementById('score-value').innerHTML=0; localStorage.setItem('oldscore', 0); clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
         document.getElementById('reset').onclick = function() {if (Number(document.getElementById('move').value)==1){
 
     
@@ -1203,11 +1220,17 @@ controller: {dragPan: false}
 
 }}
         document.getElementById('submit').onclick = function() {
+          localStorage.setItem('difficulty', document.getElementById('hard').value);
+          document.getElementById('submit').style.visibility = 'hidden';
     if(document.getElementById('guess').value==data[randrow].country){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; document.getElementById('score-value').innerHTML=score;clearInterval(timerInterval);}
     else{text1="Incorrect! The correct answer was: ";document.getElementById('submit-value').innerHTML =text1.concat(data[randrow].name); document.getElementById('score-value').innerHTML=0;clearInterval(timerInterval);}
+    
+    localStorage.setItem('oldscore', score);
+    
     document.getElementById('link-value').innerHTML= `<a href="https://www.google.com/maps/place/${data[randrow].city},${data[randrow].name}" target="_blank">See Previous City</a>`;
     //newMap(document.getElementById('score-value').innerHTML, data);
     if (Number.isInteger(Number(document.getElementById('hard').value))){document.getElementById('next').style.visibility ='visible';}
+    
 
 }
 
@@ -1223,7 +1246,7 @@ controller: {dragPan: false}
 }
 
 document.getElementById('guess').value='';
-//alert("Welcome to MapGuessr! You will be shown a section of a map. You may zoom in and pan around. Your task is to guess the country shown in the map selection. You can select the country name in the dropdown field and then click submit to see if you were correct or incorrect. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the difficulty level with the difficulty dropdown. Street Mode is a 3D map mode with buildings. There is a two-minute time limit for each round. Enjoy the game!");
+//alert("Welcome to MapGuessr! You will be shown a section of a map. You may zoom in and pan around. Your task is to guess the country shown in the center of the map selection. You can select the country name in the dropdown field and then click submit to see if you were correct or incorrect. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the difficulty level with the difficulty dropdown. Street Mode is a 3D map mode with buildings. There is a two-minute time limit for each round. Enjoy the game!");
 d3.dsv(",", "cities.csv", function (d) {
       return {
         // format data attributes if required
@@ -1235,7 +1258,13 @@ d3.dsv(",", "cities.csv", function (d) {
       }
     }).then(function (data) {
       //console.log(data);
-      newMap(0, data);
+      // if (localStorage.getItem('oldscore')==null){
+      //   newMap(0, data);
+      // }
+      // else{
+      //   newMap(localStorage.getItem('oldscore'), data);
+      // }
+        newMap(0, data);
     });
 
 
