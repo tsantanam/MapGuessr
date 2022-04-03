@@ -853,7 +853,7 @@ function setCircleDasharray() {
     }
 
      if(localStorage.getItem('difficulty')!=null){
-       console.log(localStorage.getItem('difficulty'));
+       //console.log(localStorage.getItem('difficulty'));
        document.getElementById('hard').value=localStorage.getItem('difficulty');
      }
     
@@ -1154,7 +1154,7 @@ function setCircleDasharray() {
         if (data[randrow].country==null){
             newMap(document.getElementById('score-value').innerHTML, data);
         }
-        document.getElementById('hard').oninput = function(){document.getElementById('score-value').innerHTML=0; localStorage.setItem('oldscore', 0); clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
+        document.getElementById('hard').oninput = function(){localStorage.setItem('difficulty', document.getElementById('hard').value); document.getElementById('score-value').innerHTML=0; localStorage.setItem('oldscore', 0); clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
         document.getElementById('move').oninput = function(){document.getElementById('score-value').innerHTML=0; localStorage.setItem('oldscore', 0); clearInterval(timerInterval); document.getElementById('next').style.visibility ='hidden';newMap(document.getElementById('score-value').innerHTML, data);}
         document.getElementById('reset').onclick = function() {if (Number(document.getElementById('move').value)==1){
 
