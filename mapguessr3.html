@@ -133,10 +133,40 @@
         /* box-shadow: 0 0 4px rgba(0, 0, 0, 0.15); */
         }
 
+        #share{
+            display:inline-block;
+            padding:0.4em 1.6em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            /* box-sizing: border-box; */
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            /* text-transform:uppercase; */
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#1a967b;
+            /* box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17); */
+            text-align:center;
+            position:relative;
+            }
+            #share:active{
+            top:0.1em;
+            }
+            
+
     </style>
+    <script>
+      function replaceString(){ return location.href='sms:&body=Play MapGuessr at https://mapguessr.com and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML);}
+    </script>
   </head>
   <body id="body">
-    <div id="logobox" class="toprightcorner"><a href="https://www.bonfire.com/mapguessr-merchandise/"><img id="logo" src="MapGuessr-logos/MapGuessr-logos_transparent.png" width="120" height="120"></a></div>
+    <div id="logobox" class="toprightcorner">
+      <a href="https://www.bonfire.com/mapguessr-merchandise/"><img id="logo" src="MapGuessr-logos/MapGuessr-logos_transparent.png" width="120" height="120"></a>
+      <br>
+      <a href="sms:&body=Play MapGuessr at https://mapguessr.com and beat my streak of 0! &#127759; &#128510;" onclick="replaceString()"><button id= 'share'>Share Score</button></a>
+      
+
+    </div>
     <div id="wrapper">
         <div id="control-panel">
             <div id="app"></div>
