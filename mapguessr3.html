@@ -156,14 +156,19 @@
 
     </style>
     <script>
-      function replaceString(){ return location.href='sms:&body=Play MapGuessr at https://mapguessr.com and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML);}
+      // function replaceString(){ return location.href='sms:&body=Play MapGuessr at https://mapguessr.com and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML);}
+      const shareData = {title: 'MapGuessr', text: 'Play MapGuessr and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML), url: 'https://mapguessr.com'};
+      const btn = document.querySelector('#share');
+      btn.addEventListener('click',async() => { try{await navigator.share(shareData);}catch(err){}});
+      //btn.onclick = async() => { try{await navigator.share(shareData);}catch(err){}}
     </script>
   </head>
   <body id="body">
     <div id="logobox" class="toprightcorner">
       <a href="https://www.bonfire.com/mapguessr-merchandise/"><img id="logo" src="MapGuessr-logos/MapGuessr-logos_transparent.png" width="120" height="120"></a>
       <br>
-      <a href="#" onclick="replaceString()"><button id= 'share'>Share</button></a>
+      <!-- <a href="#" onclick="replaceString()"><button id= 'share'>Share</button></a> -->
+      <button id= 'share'>Share</button>
       
 
     </div>
