@@ -202,7 +202,15 @@
             height:100%;
             background-color:rgb(250, 249, 249);
         }
-            
+        
+
+
+
+          
+        
+
+
+
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -210,16 +218,21 @@
     
   </head>
   <body id="body">
-    <script>$('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
-      $(window).on('load', function(){
-        setTimeout(removeLoader, 1000); //wait for page load PLUS one seconds.
+    <script>
+    $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+    $(window).on('load', function(){
+        setTimeout(removeLoader, 1000); //wait for page load PLUS one second.
       });
       function removeLoader(){
           $( "#loadingDiv" ).fadeOut(200, function() {
             // fadeOut complete. Remove the loading div
             $( "#loadingDiv" ).remove(); //makes page more lightweight 
         });  
-      }</script>
+      }
+      </script>
+
+
+
     <div id="logobox" class="toprightcorner">
       <a href="https://www.bonfire.com/mapguessr-merchandise/"><img id="logo" src="MapGuessr-logos/MapGuessr-logos_transparent.png" width="120" height="120"></a>
       <br>
@@ -245,12 +258,12 @@
                 <option value=16>Hard</option>
                 <option value=18>Very Hard</option>
                 <option value=19>Expert</option>
-                <option value=20>Street Mode (Beta)</option>
+                <!-- <option value=20>Street Mode (Beta)</option>
                 <option value=11.1>Easy Multiplayer (Beta)</option>
                 <option value=14.1>Medium Multiplayer (Beta)</option>
                 <option value=16.1>Hard Multiplayer (Beta)</option>
                 <option value=18.1>Very Hard Multiplayer (Beta)</option>
-                <option value=19.1>Expert Multiplayer (Beta)</option>
+                <option value=19.1>Expert Multiplayer (Beta)</option> -->
             </select>       
             </div>
             <br>
@@ -539,7 +552,8 @@
                 <input id="code" type="text" value="1619"></input>
                 <input id="codesub" type="button" value="Submit Code"></input>
             </div>
-            <p>Welcome to MapGuessr! Your task is to guess the country shown in the map selection. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the game mode and movement types with the dropdowns. There is a three-minute time limit for each round. In multiplayer mode, you can generate your own map code and share it to your friends to play the same map. Enjoy the game!</p>
+            <!-- In multiplayer mode, you can generate your own map code and share it to your friends to play the same map. -->
+            <p>Welcome to MapGuessr! Your task is to guess the country shown in the map selection. Streaks of correct answers will increase your score, while incorrect answers reset your score to 0. You may adjust the game mode and movement types with the dropdowns. There is a three-minute time limit for each round. Enjoy the game!</p>
             
             
         </div>
