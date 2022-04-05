@@ -155,13 +155,7 @@
             
 
     </style>
-    <script>
-      // function replaceString(){ return location.href='sms:&body=Play MapGuessr at https://mapguessr.com and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML);}
-      const shareData = {title: 'MapGuessr', text: 'Play MapGuessr and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML), url: 'https://mapguessr.com'};
-      const btn = document.querySelector('#share');
-      btn.addEventListener('click',async() => { try{await navigator.share(shareData);}catch(err){}});
-      //btn.onclick = async() => { try{await navigator.share(shareData);}catch(err){}}
-    </script>
+    
   </head>
   <body id="body">
     <div id="logobox" class="toprightcorner">
@@ -489,6 +483,13 @@
         </div>
     </div>   
   </body>
+  <script>
+    // function replaceString(){ return location.href='sms:&body=Play MapGuessr at https://mapguessr.com and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML);}
+    const shareData = {title: 'MapGuessr', text: 'Play MapGuessr and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML), url: 'https://mapguessr.com'};
+    const btn = document.querySelector('#share');
+    btn.addEventListener('click',async() => { try{await navigator.share(shareData); console.log(shareData);}catch(err){console.log(err);}});
+    //btn.onclick = async() => { try{await navigator.share(shareData);}catch(err){}}
+  </script>
 
   <script type="text/javascript">
     
