@@ -669,7 +669,7 @@ function setCircleDasharray() {
     document.getElementById('guess').value='';
     //document.getElementById('score-value').innerHTML=score;
     //console.log(localStorage.getItem('oldscore'));
-    if (localStorage.getItem('oldscore')>=0){
+    if (localStorage.getItem('oldscore')>0){
       document.getElementById('score-value').innerHTML=localStorage.getItem('oldscore');
     }
     else{
