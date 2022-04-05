@@ -485,10 +485,35 @@
   </body>
   <script>
     // function replaceString(){ return location.href='sms:&body=Play MapGuessr at https://mapguessr.com and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML);}
-    const shareData = {title: 'MapGuessr', text: 'Play MapGuessr and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML), url: 'https://mapguessr.com'};
-    const btn = document.querySelector('#share');
-    btn.addEventListener('click',async() => { try{await navigator.share(shareData); console.log(shareData);}catch(err){console.log(err);}});
+    //const shareData = {title: 'MapGuessr', text: 'Play MapGuessr and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML), url: 'https://mapguessr.com'};
+    //const btn = document.querySelector('#share');
+    //btn.addEventListener('click',async() => { try{await navigator.share(shareData); console.log(shareData);}catch(err){console.log(err);}});
     //btn.onclick = async() => { try{await navigator.share(shareData);}catch(err){}}
+    const btn = document.getElementById("share");
+
+  // function for web share api
+  function webShareAPI(header, description, link) {
+    navigator
+      .share({
+        title: header,
+        text: description,
+        url: link,
+      })
+      .then(() => console.log("Successful share"))
+      .catch((error) => console.log("Error sharing", error));
+  }
+
+  if (navigator.share) {
+    // Show button if it supports webShareAPI
+    btn.style.display = "block";
+    btn.addEventListener("click", () =>
+      webShareAPI("MapGuessr", 'Play MapGuessr and beat my streak of Z!'.replace('Z',document.getElementById('score-value').innerHTML) , 'https://mapguessr.com')
+    );
+  } else {
+    // Hide button if it doesn't supports webShareAPI
+    btn.style.display = "none";
+    console.error("Your Browser doesn't support Web Share API");
+  }
   </script>
 
   <script type="text/javascript">
