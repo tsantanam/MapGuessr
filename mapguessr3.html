@@ -567,17 +567,17 @@
       .catch((error) => console.log("Error sharing", error));
   }
 
-  if (navigator.share) {
-    // Show button if it supports webShareAPI
-    //btn.style.display = "block";
-    btn.addEventListener("click", () =>
-      webShareAPI("MapGuessr", 'Play MapGuessr and beat my Daily Challenge streak of 0!'.replace('0',document.getElementById('score-value').innerHTML) , 'https://mapguessr.com')
-    );
-  } else {
-    // Hide button if it doesn't supports webShareAPI
-    //btn.style.display = "none";
-    console.error("Your Browser doesn't support Web Share API");
-  }
+  // if (navigator.share) {
+  //   // Show button if it supports webShareAPI
+  //   //btn.style.display = "block";
+  //   btn.addEventListener("click", () =>
+  //     webShareAPI("MapGuessr", 'Play MapGuessr and beat my Daily Challenge streak of 0!'.replace('0',document.getElementById('score-value').innerHTML) , 'https://mapguessr.com')
+  //   );
+  // } else {
+  //   // Hide button if it doesn't supports webShareAPI
+  //   //btn.style.display = "none";
+  //   console.error("Your Browser doesn't support Web Share API");
+  // }
   </script>
 
   <script type="text/javascript">
@@ -754,7 +754,8 @@ function setCircleDasharray() {
     let randrow=0;
 
     if (Number(document.getElementById('hard').value)==11.1){
-        if(navigator.share){btn.style.display = "block";}else{btn.style.display = "none";}
+        btn.style.display="none";
+        // if(navigator.share){btn.style.display = "block";}else{btn.style.display = "none";}
         document.getElementById('code').style.visibility = 'hidden';
         document.getElementById('codeval').style.visibility = 'hidden';
         document.getElementById('codesub').style.visibility = 'hidden';
@@ -1124,6 +1125,7 @@ controller: {dragPan: false}
 
 }}
         document.getElementById('submit').onclick = function() {
+          
           localStorage.setItem('difficulty', document.getElementById('hard').value);
           document.getElementById('submit').style.visibility = 'hidden';
     if(document.getElementById('guess').value==data[randrow].country){document.getElementById('submit-value').innerHTML = 'Correct!'; var score = Number(document.getElementById('score-value').innerHTML) + 1; document.getElementById('score-value').innerHTML=score;clearInterval(timerInterval);}
@@ -1134,6 +1136,25 @@ controller: {dragPan: false}
     document.getElementById('link-value').innerHTML= `<a href="https://www.google.com/maps/place/${data[randrow].city},${data[randrow].name}" target="_blank">See Previous City</a>`;
     //newMap(document.getElementById('score-value').innerHTML, data);
     if (Number.isInteger(Number(document.getElementById('hard').value))){document.getElementById('next').style.visibility ='visible';}
+
+    if(Number(document.getElementById('hard').value)==11.1){
+            if (navigator.share) {
+    // Show button if it supports webShareAPI
+    btn.style.display = "block";
+    if(Number(document.getElementById('score-value').innerHTML)>0){
+      btn.addEventListener("click", () =>
+      webShareAPI("MapGuessr", 'I solved today\'s MapGuessr Daily Challenge! Can you?' , 'https://mapguessr.com')
+    );
+    }else{btn.addEventListener("click", () =>
+      webShareAPI("MapGuessr", 'I couldn\'t solve today\'s MapGuessr Daily Challenge! Can you?' , 'https://mapguessr.com')
+    );}
+    
+  } else {
+    // Hide button if it doesn't supports webShareAPI
+    //btn.style.display = "none";
+    console.error("Your Browser doesn't support Web Share API");
+  }
+          }
     
 
 }
